@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LuckyAuth">
+    <output-path>$PROJECT_DIR$/../сборка/plugins</output-path>
+    <root id="archive" name="LuckyAuth.jar">
+      <element id="module-output" name="LuckyAuth" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resurses" />
+    </root>
+  </artifact>
+</component>
