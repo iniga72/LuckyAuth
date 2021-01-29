@@ -1,15 +1,5 @@
+settengs:
+  group_id: 127876037
+  group_token: PQOWEFQOGQWDFUIQHNWEUFQHEFJQNEWIFNQOIWENF
 messages:
-  permission: '&cДля использования данной команды вам необходим донат &aАдмин'
-  noregions: 'Вы не являетесь владельцем региона'
-  pretect: '&cВы не можете менять данный регион'
-bypass: true
-menu:
-  name: 'Защита региона'
-  status:
-    enable: '&aРегион защищён'
-    disable: '&cРегион не защищён'
-  itemname: '&eРегион: &f$region'
-  discription:
-    - '&aЗащита региона: $status'
-    - '&f==============================='
-    - '&eДля обновления защиты &a&lЖМИ'
+  auth:

@@ -10,3 +10,4 @@ commands:
   changepassword:
     aliases: [cp]
   code:
+  luckyauth:
