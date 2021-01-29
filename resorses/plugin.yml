@@ -1,6 +1,12 @@
-name: Protector
+name: LuckyAuth
 main: LuckyCode.auth.main
 version: 1.1
-author: FeatureHack
+author: LuckyCode
 commands:
-  protect:
+  register:
+    aliases: [reg]
+  login:
+    aliases: [l]
+  changepassword:
+    aliases: [cp]
+  code:

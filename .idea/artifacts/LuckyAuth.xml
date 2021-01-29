@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/../сборка/plugins</output-path>
     <root id="archive" name="LuckyAuth.jar">
       <element id="module-output" name="LuckyAuth" />
-      <element id="dir-copy" path="$PROJECT_DIR$/resurses" />
+      <element id="dir-copy" path="$PROJECT_DIR$/resorses" />
     </root>
   </artifact>
 </component>
