@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -21,9 +20,8 @@ public class LuckyAuth extends JavaPlugin implements CommandExecutor {
                 return true;
             }
         }
-        File file = new File(getDataFolder()
-                + File.separator + "config.yml");
-        if(!file.exists()) {
+
+        if(!main.fileconfig.exists()) {
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
         }
