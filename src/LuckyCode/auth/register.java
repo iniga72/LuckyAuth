@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 public class register implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if()
         sender.sendMessage("Гыг");
         return true;
     }
