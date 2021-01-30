@@ -20,4 +20,5 @@ public class main extends JavaPlugin {
         getCommand("register").setExecutor(new register());
     }
     public static FileConfiguration config;
+
 }
