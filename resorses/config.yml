@@ -9,3 +9,5 @@ messages:
   succesfull:
     - '&cAUTH &e> &fАккаунт успешно зарегистрирован!'
     - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
+  session_active: '&cAUTH &e> &fСессия активна'
+  session_unactive: '&cAUTH &e> &fСессия истекла'

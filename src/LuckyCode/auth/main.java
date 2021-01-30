@@ -61,7 +61,9 @@ public class main extends JavaPlugin {
     public static void authorization(Player p){
         if(config.getBoolean("settengs.session ")){
             String ip = p.getAddress().getHostName().toString().replace("/", "");
-            //if(getAdress())
+            if(getAdress(p.getName()).equalsIgnoreCase(ip)){
+
+            }
         }
     }
 
