@@ -5,6 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 public class register implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -29,6 +32,10 @@ public class register implements CommandExecutor {
         }
         main.setPassword(p.getName(), passone);
         sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
+        ArrayList<String> arrayList = new ArrayList<>();
+        for(String s : main.config.getStringList("messages.succesfull")) {
+            arrayList.add(s.replace("&","§"));
+        }
         return true;
     }
 }

@@ -25,6 +25,10 @@ public class main extends JavaPlugin {
         getCommand("luckyauth").setExecutor(new changepassword());
         getCommand("luckyauth").setExecutor(new code());
         getCommand("luckyauth").setExecutor(new login());
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            authorization(p);
+        }
     }
     public static FileConfiguration config;
     public static FileConfiguration params;
@@ -44,6 +48,11 @@ public class main extends JavaPlugin {
         return false;
     }
     public static HashMap<Player, Boolean> autorize;
+    public static HashMap<Player, String> code;
+
+    public static void authorization(Player p){
+        String ip = p.getAddress().getHostName().toString().replace("/", "");
+    }
 
 
 }
