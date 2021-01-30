@@ -34,7 +34,8 @@ public class register implements CommandExecutor {
         sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
         ArrayList<String> arrayList = new ArrayList<>();
         for(String s : main.config.getStringList("messages.succesfull")) {
-            arrayList.add(s.replace("&","§"));
+            s = s.replace("&","§");
+            arrayList.add(s);
         }
         return true;
     }

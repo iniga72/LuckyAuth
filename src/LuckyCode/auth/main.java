@@ -58,7 +58,6 @@ public class main extends JavaPlugin {
         if(config.getBoolean("settengs.session")){
             String ip = p.getAddress().getHostName().toString().replace("/", "");
         }
-
     }
 
 
