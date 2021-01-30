@@ -47,11 +47,18 @@ public class main extends JavaPlugin {
         if(params.getString("users." + player + ".password").equals(password))return true;
         return false;
     }
+    public static String getAdress(String player){
+        player = player.toLowerCase();
+        return params.getString("users." + player + ".ip");
+    }
     public static HashMap<Player, Boolean> autorize;
     public static HashMap<Player, String> code;
 
     public static void authorization(Player p){
-        String ip = p.getAddress().getHostName().toString().replace("/", "");
+        if(config.getBoolean("settengs.session")){
+            String ip = p.getAddress().getHostName().toString().replace("/", "");
+        }
+
     }
 
 
