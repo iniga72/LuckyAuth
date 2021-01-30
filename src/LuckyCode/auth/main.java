@@ -42,6 +42,10 @@ public class main extends JavaPlugin {
         player = player.toLowerCase();
         params.set("users." + player + ".password", password);
     }
+    public static void setAdress(Player p){
+        String ip = p.getAddress().getHostName().toString().replace("/", "");
+        params.set("users." + p.getName().toLowerCase() + ".adress", ip);
+    }
     public static boolean checkPassword(String player, String password){
         player = player.toLowerCase();
         if(params.getString("users." + player + ".password").equals(password))return true;
@@ -49,7 +53,7 @@ public class main extends JavaPlugin {
     }
     public static String getAdress(String player){
         player = player.toLowerCase();
-        return params.getString("users." + player + ".ip");
+        return params.getString("users." + player + ".adress");
     }
     public static HashMap<Player, Boolean> autorize;
     public static HashMap<Player, String> code;
