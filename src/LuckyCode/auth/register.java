@@ -20,7 +20,7 @@ public class register implements CommandExecutor {
            return true;
         }
         Player p = (Player) sender;
-        if(main.autorize.get(p)){
+        if(main.autorize.containsKey(p) && main.autorize.get(p)){
             sender.sendMessage(main.config.getString("messages.autorize").replace("§", "&"));
             return true;
         }

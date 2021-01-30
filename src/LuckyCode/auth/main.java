@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class main extends JavaPlugin {
@@ -18,7 +19,16 @@ public class main extends JavaPlugin {
             saveDefaultConfig();
         }
         config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
-        params = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
+        file = new File(getDataFolder()
+                + File.separator + "params.yml");
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        params = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "params.yml"));
         Bukkit.getPluginManager().registerEvents(new events(), this);
         getCommand("register").setExecutor(new register());
         getCommand("luckyauth").setExecutor(new LuckyAuth());
