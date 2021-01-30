@@ -1,5 +1,6 @@
 package LuckyCode.auth;
 
+import com.sun.deploy.security.CertStore;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,6 +12,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class main extends JavaPlugin {
+    public static File fileconfig = new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml");
+
+    public static File fileparam = new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "params.yml");
     public void onEnable() {
         File file = new File(getDataFolder()
                 + File.separator + "config.yml");
@@ -18,7 +22,7 @@ public class main extends JavaPlugin {
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
         }
-        config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
+        config = YamlConfiguration.loadConfiguration(fileconfig);
         file = new File(getDataFolder()
                 + File.separator + "params.yml");
         if(!file.exists()) {
@@ -28,7 +32,7 @@ public class main extends JavaPlugin {
                 e.printStackTrace();
             }
         }
-        params = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "params.yml"));
+        params = YamlConfiguration.loadConfiguration(fileparam);
         Bukkit.getPluginManager().registerEvents(new events(), this);
         getCommand("register").setExecutor(new register());
         getCommand("luckyauth").setExecutor(new LuckyAuth());
@@ -51,10 +55,20 @@ public class main extends JavaPlugin {
     public static void setPassword(String player, String password){
         player = player.toLowerCase();
         params.set("users." + player + ".password", password);
+        try {
+            params.save(fileparam);
+        }
+        catch (IOException e2) {
+        }
     }
     public static void setAdress(Player p){
         String ip = p.getAddress().getHostName().toString().replace("/", "");
         params.set("users." + p.getName().toLowerCase() + ".adress", ip);
+        try {
+            params.save(fileparam);
+        }
+        catch (IOException e2) {
+        }
     }
     public static boolean checkPassword(String player, String password){
         player = player.toLowerCase();
