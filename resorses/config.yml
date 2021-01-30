@@ -2,4 +2,4 @@ settengs:
   group_id: 127876037
   group_token: PQOWEFQOGQWDFUIQHNWEUFQHEFJQNEWIFNQOIWENF
 messages:
-  auth:
+  isregister: '&cAUTH &e> &fВы уже зарегистрированы!'
