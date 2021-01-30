@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class main extends JavaPlugin {
+    public main(){
+        autorize = new HashMap<Player, Boolean>();
+    }
+
     public void onEnable() {
         File file = new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml");
         if(!file.exists()) {
@@ -43,8 +47,8 @@ public class main extends JavaPlugin {
 
     public static boolean isRegister(String player){
         player = player.toLowerCase();
-        if(params.getString("users." + player) != null)return true;
-        return false;
+        if(params.getString("users." + player + ".password") == null)return false;
+        return true;
     }
     public static void setPassword(String player, String password){
         player = player.toLowerCase();

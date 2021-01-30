@@ -1,5 +1,6 @@
 package LuckyCode.auth;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,11 +20,14 @@ public class register implements CommandExecutor {
            sender.sendMessage(main.config.getString("messages.isregister").replace("§", "&"));
            return true;
         }
+
         Player p = (Player) sender;
         if(main.autorize.containsKey(p) && main.autorize.get(p)){
             sender.sendMessage(main.config.getString("messages.autorize").replace("§", "&"));
             return true;
         }
+        Bukkit.broadcastMessage("1");
+        if (args.length != 2) return  true;
         String passone = args[0];
         String passtwo = args[1];
         if(!passone.equals(passtwo)){
