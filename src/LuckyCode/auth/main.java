@@ -30,7 +30,7 @@ public class main extends JavaPlugin {
         params = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "params.yml"));
         Bukkit.getPluginManager().registerEvents(new events(), this);
         getCommand("register").setExecutor(new register());
-        getCommand("luckyauth").setExecutor(new LuckyAuth());
+        getCommand("luckyauth").setExecutor(new reload());
         getCommand("changepassword").setExecutor(new changepassword());
         getCommand("code").setExecutor(new code());
         getCommand("login").setExecutor(new login());
