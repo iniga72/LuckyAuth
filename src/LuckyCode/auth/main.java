@@ -3,9 +3,11 @@ package LuckyCode.auth;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 
 public class main extends JavaPlugin {
     public void onEnable() {
@@ -41,6 +43,7 @@ public class main extends JavaPlugin {
         if(params.getString("users." + player + ".password").equals(password))return true;
         return false;
     }
+    public static HashMap<Player, Boolean> autorize;
 
 
 }
