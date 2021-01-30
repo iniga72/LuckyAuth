@@ -16,7 +16,19 @@ public class register implements CommandExecutor {
            sender.sendMessage(main.config.getString("messages.isregister").replace("§", "&"));
            return true;
         }
-
+        Player p = (Player) sender;
+        if(main.autorize.get(p)){
+            sender.sendMessage(main.config.getString("messages.autorize").replace("§", "&"));
+            return true;
+        }
+        String passone = args[0];
+        String passtwo = args[1];
+        if(!passone.equals(passtwo)){
+            sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
+            return true;
+        }
+        main.setPassword(p.getName(), passone);
+        sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
         return true;
     }
 }

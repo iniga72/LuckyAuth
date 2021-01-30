@@ -3,3 +3,8 @@ settengs:
   group_token: PQOWEFQOGQWDFUIQHNWEUFQHEFJQNEWIFNQOIWENF
 messages:
   isregister: '&cAUTH &e> &fВы уже зарегистрированы!'
+  autorize: '&cAUTH &e> &fВы уже авторизованы!'
+  noverify: '&cAUTH &e> &fПароли не совпадают!'
+  succesfull:
+    - '&cAUTH &e> &fАккаунт успешно зарегистрирован!'
+    - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
