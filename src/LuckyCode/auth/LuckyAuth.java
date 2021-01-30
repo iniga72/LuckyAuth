@@ -16,6 +16,10 @@ public class LuckyAuth extends JavaPlugin implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if(commandSender instanceof Player){
             Player p = (Player) commandSender;
+            if(p.hasPermission("luckyauth.reload")){
+                p.sendMessage("хуй сбаки");
+                return true;
+            }
         }
         File file = new File(getDataFolder()
                 + File.separator + "config.yml");
@@ -23,7 +27,8 @@ public class LuckyAuth extends JavaPlugin implements CommandExecutor {
             getConfig().options().copyDefaults(true);
             saveDefaultConfig();
         }
-        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
+        main.config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
+        commandSender.sendMessage("§aReaload complited");
         return true;
     }
 }
