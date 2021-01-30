@@ -28,7 +28,10 @@ public class main extends JavaPlugin {
     public static FileConfiguration params;
 
     public boolean isRegister(String player){
-
+        player = player.toLowerCase();
+        if(params.getString("users." + player) != null){
+            return true;
+        }
         return false;
     }
 
