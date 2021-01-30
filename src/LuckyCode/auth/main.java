@@ -16,6 +16,7 @@ public class main extends JavaPlugin {
             saveDefaultConfig();
         }
         config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
+        params = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
         Bukkit.getPluginManager().registerEvents(new events(), this);
         getCommand("register").setExecutor(new register());
         getCommand("luckyauth").setExecutor(new LuckyAuth());
