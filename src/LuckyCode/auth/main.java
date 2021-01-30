@@ -29,9 +29,16 @@ public class main extends JavaPlugin {
 
     public static boolean isRegister(String player){
         player = player.toLowerCase();
-        if(params.getString("users." + player) != null){
-            return true;
-        }
+        if(params.getString("users." + player) != null)return true;
+        return false;
+    }
+    public static void setPassword(String player, String password){
+        player = player.toLowerCase();
+        params.set("users." + player + ".password", password);
+    }
+    public static boolean checkPassword(String player, String password){
+        player = player.toLowerCase();
+        if(params.getString("users." + player + ".password").equals(password))return true;
         return false;
     }
 
