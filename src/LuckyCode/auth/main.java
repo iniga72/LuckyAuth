@@ -18,7 +18,18 @@ public class main extends JavaPlugin {
         config = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml"));
         Bukkit.getPluginManager().registerEvents(new events(), this);
         getCommand("register").setExecutor(new register());
+        getCommand("luckyauth").setExecutor(new LuckyAuth());
+        getCommand("luckyauth").setExecutor(new changepassword());
+        getCommand("luckyauth").setExecutor(new code());
+        getCommand("luckyauth").setExecutor(new login());
     }
     public static FileConfiguration config;
+    public static FileConfiguration params;
+
+    public boolean isRegister(String player){
+
+        return false;
+    }
+
 
 }
