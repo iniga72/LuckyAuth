@@ -1,6 +1,7 @@
 settengs:
   group_id: 127876037
   group_token: PQOWEFQOGQWDFUIQHNWEUFQHEFJQNEWIFNQOIWENF
+  session: true
 messages:
   isregister: '&cAUTH &e> &fВы уже зарегистрированы!'
   autorize: '&cAUTH &e> &fВы уже авторизованы!'
