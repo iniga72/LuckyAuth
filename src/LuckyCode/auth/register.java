@@ -26,7 +26,6 @@ public class register implements CommandExecutor {
             sender.sendMessage(main.config.getString("messages.autorize").replace("§", "&"));
             return true;
         }
-        Bukkit.broadcastMessage("1");
         if (args.length != 2) return  true;
         String passone = args[0];
         String passtwo = args[1];
@@ -34,13 +33,12 @@ public class register implements CommandExecutor {
             sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
             return true;
         }
-        main.setPassword(p.getName(), passone);
-        sender.sendMessage(main.config.getString("messages.noverify").replace("§", "&"));
-        ArrayList<String> arrayList = new ArrayList<>();
+
         for(String s : main.config.getStringList("messages.succesfull")) {
             s = s.replace("&","§");
-            arrayList.add(s);
+            sender.sendMessage(s);
         }
+        main.setPassword(p.getName(), passone, p.getAddress().getAddress().toString().replace("/", ""));
         return true;
     }
 }

@@ -15,7 +15,10 @@ public class main extends JavaPlugin {
         autorize = new HashMap<Player, Boolean>();
     }
 
+    public static Database db;
     public void onEnable() {
+        db = new SQLite(this);
+        db.load();
         File file = new File(Bukkit.getPluginManager().getPlugin("LuckyAuth").getDataFolder() + File.separator + "config.yml");
         if(!file.exists()) {
             getConfig().options().copyDefaults(true);
@@ -47,13 +50,12 @@ public class main extends JavaPlugin {
 
     public static boolean isRegister(String player){
         player = player.toLowerCase();
-        if(params.getString("users." + player + ".password") == null)return false;
+        String end = db.isRegister(player);
+        if(end == "" || end == null)return false;
         return true;
     }
-    public static void setPassword(String player, String password){
-        player = player.toLowerCase();
-        params.set("users." + player + ".password", password);
-
+    public static void setPassword(String player, String password, String ip){
+        db.newPlayer(player , password, ip);
     }
     public static void setAdress(Player p){
         String ip = p.getAddress().getHostName().toString().replace("/", "");
