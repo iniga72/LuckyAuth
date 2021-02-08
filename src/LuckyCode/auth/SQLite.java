@@ -17,7 +17,7 @@ public class SQLite extends Database{
     public String SQLiteCreateTokensTable = "CREATE TABLE IF NOT EXISTS LuckyAuth (" +
             "id INTEGER NOT NULL UNIQUE," +
             "nick REAL NOT NULL UNIQUE," +
-            "ip TEXT NOT NULL," +
+            "ip TEXT ," +
             "realname TEXT NOT NULL," +
             "password TEXT NOT NULL," +
             "date INTEGER NOT NULL," +

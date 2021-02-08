@@ -1,13 +1,90 @@
 settengs:
-  group_id: 127876037
-  group_token: PQOWEFQOGQWDFUIQHNWEUFQHEFJQNEWIFNQOIWENF
-  session: true
+  group_id: 192729453
+  group_token: 1aadca99f6e63e255a0d9a202b84087760a34c2c9aa22a283cd53c993a70c45df30a4e0210436aed439ef
+  session: false
+  wrongpasswrd: true
+  length:
+    min: 5
+    max: 16
+  blocked:
+    move: true
+    dropitem: true
+    damage: true
+    blockbreak: true
+    blockplace: true
+    inventoryclick: true
+    pickup: true
+    chat: true
+    cmd: true
+help:
+  register: '&cAUTH &e> &fИспользуйте &e/register [пароль] [пароль]'
+  login: '&cAUTH &e> &fИспользуйте &e/login  [пароль]'
+  changepassword: '&cAUTH &e> &fИспользуйте &e/cp [старый пароль] [новый пароль]'
+notyfications:
+  register:
+    - '&cAUTH &e> &fНеобходимо пройти регистрацию'
+    - '&cAUTH &e> &fИспользуйте /register [пароль] [пароль]'
+  login:
+    - '&cAUTH &e> &fНеобходимо пройти авторизацию'
+    - '&cAUTH &e> &fИспользуйте /login [пароль]'
+  code:
+    - '&cAUTH &e> &fНеобходимо подтвердить вход'
+    - '&cAUTH &e> &fИспользуйте /code [код]'
+vk:
+  send: 'На ваш аккаунт вошли. Код подтверждения: $code'
+  recover: 'Новый пароль: $pass'
+  access:
+    text: '&cAUTH &e> &fВы получили запрос на привязку аккаунта к странице.'
+    accept: '&aПринять'
+    decline: '&cОтклонить'
+  online: 'Игрок не онлайн'
+  newpassword: 'Пароль был успешно изменён. Новый пароль: $pass'
+  events:
+    connect: 'привязать'
+    disconnect: 'отвязать'
+    recover: 'восстановить'
+  disconnect: 'Страница успешно отвязана от аккаунта.'
+  connect:
+    help: 'Для привязки используйте: Привязать [ник]'
+    haveconnect: 'Ваша страница уже привязана к нику $player'
+    haventconnect: 'Ваша страница не привязана к аккаунту'
+    send: 'Подтвердите привязку в на сервере.'
+    auth: 'Перед привязкой нужно быть авторизованным'
+    accept: 'Запрос принят. Аккаунт привязан.'
+    decline: 'Запрос отклонён. Аккаунт не привязан.'
 messages:
   isregister: '&cAUTH &e> &fВы уже зарегистрированы!'
   autorize: '&cAUTH &e> &fВы уже авторизованы!'
+  permission: '&cAUTH &e> &fУ вас не достаточно прав'
+  minpassword: '&cAUTH &e> &fМинимальный пароль должен состоять из $count символов'
+  maxpassword: '&cAUTH &e> &fМинимальный пароль должен состоять из $count символов'
+  playernotfound: '&cAUTH &e> &fИгрок не найден'
   noverify: '&cAUTH &e> &fПароли не совпадают!'
+  vk:
+    accept: '&cAUTH &e> &fПривязка принята'
+    decline: '&cAUTH &e> &fПривязка отклонена'
+    empty: '&cAUTH &e> &fУ вас нет запросов на привязку'
+  wrongpasswrd: '&cAUTH &e> &fПароль не верный'
+  oldwrongpasswrd: '&cAUTH &e> &fСтарый пароль не верный'
   succesfull:
-    - '&cAUTH &e> &fАккаунт успешно зарегистрирован!'
-    - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
-  session_active: '&cAUTH &e> &fСессия активна'
-  session_unactive: '&cAUTH &e> &fСессия истекла'
+    register:
+      - '&cAUTH &e> &fАккаунт успешно зарегистрирован!'
+      - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
+    login:
+      - '&cAUTH &e> &fАвторизация прошла успешно.'
+      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+    code:
+      - '&cAUTH &e> &fАвторизация прошла успешно.'
+      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+    changepassword:
+      - '&cAUTH &e> &fПароль успешно изменён.'
+      - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
+    disconnect:
+      - '&cAUTH &e> &fАккаунт был отвязан от ващей страницы.'
+    session:
+      - '&cAUTH &e> &fСессия активна. Пароль вводить не нужно'
+      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+  reference:
+    - '&cAUTH &e> &fУ вас нет активной привязки к ВКонтакте'
+    - '&cAUTH &e> &fДля привязки перейдите в группу https://vk.com/luckycodenew'
+    - '&cAUTH &e> &fНапишите: &eПривязать $player'
