@@ -21,23 +21,18 @@ public class register implements CommandExecutor {
             sender.sendMessage(main.config.getString("messages.autorize").replace("&", "§").replace("&", "§"));
             return true;
         }
-        if (args.length != 2){
+        if (args.length != 1){
             sender.sendMessage(main.config.getString("help.register").replace("&", "§").replace("&", "§"));
             return  true;}
         String passone = args[0];
-        String passtwo = args[1];
-        if(!passone.equals(passtwo)){
-            sender.sendMessage(main.config.getString("messages.noverify").replace("&", "§"));
-            return true;
-        }
         int min = main.config.getInt("settengs.length.min");
         int max = main.config.getInt("settengs.length.max");
         if(passone.length() < min){
-            p.sendMessage(main.config.getString("messages.minpassword").replace("$count", min + ""));
+            p.sendMessage(main.config.getString("messages.minpassword").replace("$count", min + "").replace("&", "§"));
             return true;
         }
         if(passone.length() > max){
-            p.sendMessage(main.config.getString("messages.maxpassword").replace("$count", min + ""));
+            p.sendMessage(main.config.getString("messages.maxpassword").replace("$count", min + "").replace("&", "§"));
             return true;
         }
         for(String s : main.config.getStringList("messages.succesfull.register")) {
@@ -52,10 +47,11 @@ public class register implements CommandExecutor {
         }
         try {
             main.db.newPlayer(p.getName() , passone, p.getAddress().getAddress().toString().replace("/", ""));
+            main.autorize.put(p, 1);
         } catch (NoSuchAlgorithmException ignored) {
 
         }
-        main.autorize.put(p, 1);
+
         return true;
     }
 }

@@ -20,7 +20,7 @@ public class SQLite extends Database{
             "ip TEXT ," +
             "realname TEXT NOT NULL," +
             "password TEXT NOT NULL," +
-            "date INTEGER NOT NULL," +
+            "google TEXT NOT NULL," +
             "code TEXT," +
             "vk INTEGER UNIQUE," +
             "PRIMARY KEY(id AUTOINCREMENT));"; // we can search by player, and get kills and total. If you some how were searching kills it would provide total and player.

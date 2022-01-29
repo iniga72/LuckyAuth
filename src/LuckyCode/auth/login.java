@@ -1,6 +1,7 @@
 package LuckyCode.auth;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,6 +29,7 @@ public class login  implements CommandExecutor {
             try {
                 if(!main.db.ha(args[0]).equals(main.db.getPassword(p.getName()))){
                     if(main.config.getBoolean("settengs.wrongpasswrd")){
+
                         p.kickPlayer(main.config.getString("messages.wrongpasswrd").replace("&", "§"));
                         return true;
                     }
@@ -35,7 +37,6 @@ public class login  implements CommandExecutor {
                     return true;
                 }
             } catch (NoSuchAlgorithmException ignored) {
-
             }
             String vk = main.db.getVK(p.getName());
             if(vk == null){
@@ -44,18 +45,27 @@ public class login  implements CommandExecutor {
                     s = s.replace("&","§");
                     sender.sendMessage(s);
                 }
-                main.db.setAdress(p.getName(), p.getAddress().getHostName().replace("/", ""));
+                main.db.setAdress(p.getName(), p.getAddress().getAddress().getHostAddress().replace("/", ""));
             }else {
                 main.autorize.put(p, 2);
-                main.sendCode(p.getName(), vk);
-                for(String s : main.config.getStringList("notyfications.code")) {
-                    s = s.replace("&","§");
-                    sender.sendMessage(s);
+                if(main.config.getBoolean("settengs.keyboard")){
+                    main.sendkeyboard(vk, ((Player) sender).getAddress().getAddress().getHostAddress(), sender.getName());
+                    for(String s : main.config.getStringList("notyfications.accept")) {
+                        s = s.replace("&","§");
+                        sender.sendMessage(s);
+                    }
+                }else{
+                    main.sendCode(p.getName(), vk);
+
+                    for(String s : main.config.getStringList("notyfications.code")) {
+                        s = s.replace("&","§");
+                        sender.sendMessage(s);
+                    }
                 }
+
             }
         }else {
                 sender.sendMessage(main.config.getString("messages.autorize").replace("&", "§"));
-
         }
         return true;
     }

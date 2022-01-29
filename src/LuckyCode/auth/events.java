@@ -1,7 +1,5 @@
 package LuckyCode.auth;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +18,7 @@ public class events implements Listener {
         main.authorization(p);
         String loc = p.getLocation().getBlockX() + "_" + p.getLocation().getBlockZ();
         main.loc.put(p, loc);
+
     }
     @EventHandler
     public void leave(PlayerQuitEvent e){
@@ -27,7 +26,20 @@ public class events implements Listener {
         main.loc.remove(e.getPlayer());
         main.connect.remove(e.getPlayer());
     }
+    /*@EventHandler
+    public void bloc(BlockPlaceEvent e){
+        Block b = e.getBlock();
 
+        Location en_loc = e.getBlock().getLocation().add(0,-1,0);
+        Vector dir = b.getLocation().toVector().subtract(en_loc.toVector()).normalize();
+        FallingBlock fb = b.getWorld().spawnFallingBlock(en_loc, b.getType(), (byte) 0x0);
+
+        //fb.setVelocity();
+        fb.setVelocity(dir.multiply(1));
+        e.getBlock().setType(Material.AIR);
+
+
+    }*/
     @EventHandler
     public void cmd(PlayerCommandPreprocessEvent e){
         if(e.isCancelled())return;
@@ -44,9 +56,16 @@ public class events implements Listener {
                 e.setCancelled(true);
                 if(main.isRegister(p.getName())){
                     if(main.autorize.containsKey(p) && main.autorize.get(p) ==2){
-                        for(String s : main.config.getStringList("notyfications.code")) {
-                            s = s.replace("&","§");
-                            p.sendMessage(s);
+                        if(main.config.getBoolean("settengs.keyboard")){
+                            for(String s : main.config.getStringList("notyfications.accept")) {
+                                s = s.replace("&","§");
+                                p.sendMessage(s);
+                            }
+                        }else{
+                            for(String s : main.config.getStringList("notyfications.code")) {
+                                s = s.replace("&","§");
+                                p.sendMessage(s);
+                            }
                         }
                     }
                     if(main.autorize.containsKey(p) && main.autorize.get(p) ==0){
@@ -74,9 +93,16 @@ public class events implements Listener {
             e.setCancelled(true);
             if(main.isRegister(p.getName())){
                 if(main.autorize.containsKey(p) && main.autorize.get(p) ==2){
-                    for(String s : main.config.getStringList("notyfications.code")) {
-                        s = s.replace("&","§");
-                        p.sendMessage(s);
+                    if(main.config.getBoolean("settengs.keyboard")){
+                        for(String s : main.config.getStringList("notyfications.accept")) {
+                            s = s.replace("&","§");
+                            p.sendMessage(s);
+                        }
+                    }else{
+                        for(String s : main.config.getStringList("notyfications.code")) {
+                            s = s.replace("&","§");
+                            p.sendMessage(s);
+                        }
                     }
                 }
                 if(main.autorize.containsKey(p) && main.autorize.get(p) ==0){

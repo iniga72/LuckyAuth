@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 public class changepassword implements CommandExecutor {
@@ -30,7 +31,7 @@ public class changepassword implements CommandExecutor {
                 }
                 String vk = main.db.getVK(args[0]);
                 if(vk != null){
-                    main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk);
+                    main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk, "");
                 }
                 try {
                     main.db.setPassword(args[0], args[1]);
@@ -39,7 +40,7 @@ public class changepassword implements CommandExecutor {
                         s = s.replace("$pass",args[1]);
                         sender.sendMessage(s);
                     }
-                } catch (NoSuchAlgorithmException ignored) {
+                } catch (NoSuchAlgorithmException | IOException ignored) {
 
                 }
                 main.db.setAdress(args[0], null);
@@ -78,7 +79,7 @@ public class changepassword implements CommandExecutor {
             }
             String vk = main.db.getVK(p.getName());
             if(vk != null){
-                main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk);
+                main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk, "");
             }
             for(String s : main.config.getStringList("messages.succesfull.changepassword")) {
                 s = s.replace("&","§");
@@ -87,7 +88,7 @@ public class changepassword implements CommandExecutor {
             }
             try {
                 main.db.setPassword(p.getName(), args[1]);
-            } catch (NoSuchAlgorithmException ignored) {
+            } catch (NoSuchAlgorithmException | IOException ignored) {
 
             }
         }else {
@@ -108,7 +109,7 @@ public class changepassword implements CommandExecutor {
                 }
                 String vk = main.db.getVK(args[0]);
                 if(vk != null){
-                    main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk);
+                    main.api.sendMessage(main.config.getString("vk.newpassword").replace("$pass", args[1]), vk, "");
                 }
                 try {
                     main.db.setPassword(args[0], args[1]);
@@ -117,7 +118,7 @@ public class changepassword implements CommandExecutor {
                         s = s.replace("$pass",args[1]);
                         sender.sendMessage(s);
                     }
-                } catch (NoSuchAlgorithmException ignored) {
+                } catch (NoSuchAlgorithmException | IOException ignored) {
 
                 }
                 main.db.setAdress(args[0], null);

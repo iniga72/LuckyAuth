@@ -12,7 +12,7 @@ public class reload implements CommandExecutor {
         if(args[0].equalsIgnoreCase("reload")){
             if ((sender instanceof Player)){
                 Player p = (Player) sender;
-                if(!p.hasPermission("luckyauth.reload")){
+                if(!p.hasPermission("vkauth.reload")){
                     p.sendMessage(main.config.getString("messages.permission").replace("&","§"));
                     return true;
                 }
@@ -29,7 +29,7 @@ public class reload implements CommandExecutor {
             if(main.connect.containsKey(p)){
                 String id = main.connect.get(p);
                 String msg = main.config.getString("vk.connect.accept");
-                main.api.sendMessage(msg, id);
+                main.api.sendMessage(msg, id, "");
                 p.sendMessage(main.config.getString("messages.vk.accept").replace("&", "§"));
                 main.connect.remove(p);
                 main.db.setVK(sender.getName(), id);
@@ -42,7 +42,7 @@ public class reload implements CommandExecutor {
             if(main.connect.containsKey(p)){
                 String id = main.connect.get(p);
                 String msg = main.config.getString("vk.connect.decline");
-                main.api.sendMessage(msg, id);
+                main.api.sendMessage(msg, id, "");
                 p.sendMessage(main.config.getString("messages.vk.decline").replace("&", "§"));
                 main.connect.remove(p);
             }else{

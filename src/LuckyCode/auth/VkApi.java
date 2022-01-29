@@ -1,19 +1,19 @@
 package LuckyCode.auth;
 
-import org.apache.commons.lang.StringUtils;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.commons.lang.StringUtils;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
+
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -27,6 +27,7 @@ public abstract class VkApi {
     private final BukkitRunnable run;
     private String server = null;
     private String key;
+    public static String keyboard;
     private int ts;
     private String apikey;
     private String id;
@@ -56,7 +57,7 @@ public abstract class VkApi {
     }
 
     private void getLongPool() {
-        JsonObject json = vkCall("groups.getLongPollServer", "group_id", this.id).getAsJsonObject("response");
+        JsonObject json = Objects.requireNonNull(vkCall("groups.getLongPollServer", "group_id", this.id)).getAsJsonObject("response");
         key = json.get("key").getAsString();
         server = json.get("server").getAsString();
         ts = json.get("ts").getAsInt();
@@ -73,37 +74,8 @@ public abstract class VkApi {
 
     private JsonObject vkCall(String method, String... arrStr) {
         HashMap<String, String> data = new HashMap<>();
-
-        /*String keyboard = "{\n" +
-        "  \"one_time\": false,\n" +
-        "  \"buttons\": [\n" +
-        "    [\n" +
-        "      {\n" +
-        "        \"action\": {\n" +
-        "          \"type\": \"text\",\n" +
-        "          \"payload\": \"{\\\"button\\\": \\\"1\\\"}\",\n" +
-        "          \"label\": \"Red\"\n" +
-        "        },\n" +
-        "        \"color\": \"negative\"\n" +
-        "      },\n" +
-        "      {\n" +
-        "        \"action\": {\n" +
-        "          \"type\": \"text\",\n" +
-        "          \"payload\": \"{\\\"button\\\": \\\"2\\\"}\",\n" +
-        "          \"label\": \"Green\"\n" +
-        "        },\n" +
-        "        \"color\": \"positive\"\n" +
-        "      }\n" +
-        "    ]\n" +
-        "  ]\n" +
-        "} ";*/
-
-        String v = "5.126";
+        String v = "5.85";
         data.put("v", v);
-
-        int random_id = (int)(Math.random() * 1000);
-        //data.put("random_id", "99");
-        //data.put("keyboard", keyboard);
         data.put("access_token", this.apikey);
         String str1 = null;
         boolean bol = true;
@@ -129,7 +101,7 @@ public abstract class VkApi {
 
     public void sendMessage(SendingMessage message, boolean directly) {
         if (directly) {
-            vkCall("messages.send", "peer_id", message.getPeer(), "message", message.toString(),"random_id", "1");
+            vkCall("messages.send", "peer_id", message.getPeer(), "message", message.toString(), "" );
         } else {
             buffer.add(message);
         }
@@ -139,7 +111,8 @@ public abstract class VkApi {
         sendMessage(message, false);
     }
 
-    public void sendMessage(String message, String from) {
+    public void sendMessage(String message, String from, String keyboard1) {
+        keyboard = keyboard1;
         sendMessage(new SendingMessage(message, from));
     }
     private LinkedHashSet<ReceivedMessage> getMessage() {
@@ -204,13 +177,14 @@ public abstract class VkApi {
                         builder = map.get(message.getPeer());
                     builder.append(message.toString()).append("\n");
                 }
-                map.forEach((p, s) -> vkCall("messages.send", "peer_id", p, "message", s.toString()));
+                map.forEach((p, s) -> vkCall("messages.send", "peer_id", p, "message", s.toString(), "keyboard", keyboard));
                 LinkedHashSet<ReceivedMessage> receiveMap = getMessage();;
                 for (ReceivedMessage message : receiveMap) {
                     try {
                         receiveMessage(message);
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException | IOException e) {
+                        Bukkit.getLogger().warning("Необходимо указать верный айди и токен группы");
+                        cancel();
                     }
                 }
             }
@@ -219,7 +193,7 @@ public abstract class VkApi {
         return run;
     }
 
-    protected abstract void receiveMessage(ReceivedMessage message) throws NoSuchAlgorithmException;
+    protected abstract void receiveMessage(ReceivedMessage message) throws NoSuchAlgorithmException, IOException;
 
     public String getId() {
         return id;
@@ -384,9 +358,12 @@ public abstract class VkApi {
             this.peer = peer;
         }
 
+
+
         public SendingMessage(String msg, String peer) {
             this.msg = msg;
             this.peer = peer;
+
 
         }
     }

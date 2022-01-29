@@ -16,7 +16,7 @@ public class code implements CommandExecutor {
             if(code.equals(args[0])){
                 main.db.setCode(p.getName(), null);
                 main.autorize.put(p, 1);
-                main.db.setAdress(p.getName(), p.getAddress().getHostName().replace("/", ""));
+                main.db.setAdress(p.getName(), p.getAddress().getAddress().getHostAddress().replace("/", ""));
                 for(String s : main.config.getStringList("messages.succesfull.code")) {
                     s = s.replace("&","§");
                     sender.sendMessage(s);

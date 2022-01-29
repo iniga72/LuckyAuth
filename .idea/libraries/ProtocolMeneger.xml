@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ProtocolMeneger">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../сборка/plugins/ProtocolMeneger.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

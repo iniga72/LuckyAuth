@@ -1,7 +1,8 @@
 settengs:
-  group_id: 192729453
-  group_token: 1aadca99f6e63e255a0d9a202b84087760a34c2c9aa22a283cd53c993a70c45df30a4e0210436aed439ef
+  group_id: id
+  group_token: key
   session: false
+  keyboard: false
   wrongpasswrd: true
   length:
     min: 5
@@ -17,24 +18,40 @@ settengs:
     chat: true
     cmd: true
 help:
-  register: '&cAUTH &e> &fИспользуйте &e/register [пароль] [пароль]'
+  register: '&cAUTH &e> &fИспользуйте &e/register [пароль]'
   login: '&cAUTH &e> &fИспользуйте &e/login  [пароль]'
   changepassword: '&cAUTH &e> &fИспользуйте &e/cp [старый пароль] [новый пароль]'
 notyfications:
   register:
     - '&cAUTH &e> &fНеобходимо пройти регистрацию'
-    - '&cAUTH &e> &fИспользуйте /register [пароль] [пароль]'
+    - '&cAUTH &e> &fИспользуйте /register [пароль]'
   login:
     - '&cAUTH &e> &fНеобходимо пройти авторизацию'
     - '&cAUTH &e> &fИспользуйте /login [пароль]'
   code:
     - '&cAUTH &e> &fНеобходимо подтвердить вход'
     - '&cAUTH &e> &fИспользуйте /code [код]'
+  accept:
+    - '&cAUTH &e> &fНеобходимо подтвердить вход'
+    - '&cAUTH &e> &fПерейдите в сообщения группы'
 vk:
   send: 'На ваш аккаунт вошли. Код подтверждения: $code'
+  good: 'Вход прошел успешно.'
+  badly: 'Вход отменён успешно.'
+  keyboard:
+    message: 'На ваш аккаунт произведена попытка входа. Айпи: $ip. Ник: $name'
+    buttons:
+      accept: 'Разрешить'
+      decline: 'Запретить'
+    kick: '&cAUTH &e> &fВход был запрещён.'
+    accept:
+      - '&cAUTH &e> &fАвторизация прошла успешно.'
+      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
   recover: 'Новый пароль: $pass'
+  haventkeyboard: 'Это действие отключено'
+  haventaccept: 'Нет активного запроса на подтверждение'
   access:
-    text: '&cAUTH &e> &fВы получили запрос на привязку аккаунта к странице.'
+    text: '&cAUTH &e> &fВы получили запрос на привязку аккаунта к странице от (&9$name&f).'
     accept: '&aПринять'
     decline: '&cОтклонить'
   online: 'Игрок не онлайн'
@@ -50,7 +67,7 @@ vk:
     haventconnect: 'Ваша страница не привязана к аккаунту'
     send: 'Подтвердите привязку в на сервере.'
     auth: 'Перед привязкой нужно быть авторизованным'
-    accept: 'Запрос принят. Аккаунт привязан.'
+    accept: 'Запрос принят. Аккаунт привязан. Отвязать - позволяет отвязать аккаунт от вашей страницы. Восстановить - генерирует новый пароль'
     decline: 'Запрос отклонён. Аккаунт не привязан.'
 messages:
   isregister: '&cAUTH &e> &fВы уже зарегистрированы!'
@@ -65,6 +82,7 @@ messages:
     decline: '&cAUTH &e> &fПривязка отклонена'
     empty: '&cAUTH &e> &fУ вас нет запросов на привязку'
   wrongpasswrd: '&cAUTH &e> &fПароль не верный'
+  wrongaccept: '&cAUTH &e> &fВход запрещён'
   oldwrongpasswrd: '&cAUTH &e> &fСтарый пароль не верный'
   succesfull:
     register:
@@ -72,10 +90,10 @@ messages:
       - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
     login:
       - '&cAUTH &e> &fАвторизация прошла успешно.'
-      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+      - '&cAUTH &e> &fПриятной игры на сервере'
     code:
       - '&cAUTH &e> &fАвторизация прошла успешно.'
-      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+      - '&cAUTH &e> &fПриятной игры на сервере'
     changepassword:
       - '&cAUTH &e> &fПароль успешно изменён.'
       - '&cAUTH &e> &fВаш пароль: $pass. Никому его не говорите!'
@@ -83,8 +101,8 @@ messages:
       - '&cAUTH &e> &fАккаунт был отвязан от ващей страницы.'
     session:
       - '&cAUTH &e> &fСессия активна. Пароль вводить не нужно'
-      - '&cAUTH &e> &fПриятной игры на сервера MyServer'
+      - '&cAUTH &e> &fПриятной игры на сервере'
   reference:
     - '&cAUTH &e> &fУ вас нет активной привязки к ВКонтакте'
-    - '&cAUTH &e> &fДля привязки перейдите в группу https://vk.com/luckycodenew'
+    - '&cAUTH &e> &fДля привязки перейдите в группу https://vk.com/hc.play'
     - '&cAUTH &e> &fНапишите: &eПривязать $player'

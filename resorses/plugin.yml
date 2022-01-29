@@ -1,4 +1,4 @@
-name: LuckyAuth
+name: AuthmeVK
 main: LuckyCode.auth.main
 version: 1.1
 author: LuckyCode
@@ -10,4 +10,4 @@ commands:
   changepassword:
     aliases: [cp]
   code:
-  luckyauth:
+  vkauth:
