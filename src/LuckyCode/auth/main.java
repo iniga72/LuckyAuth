@@ -51,6 +51,7 @@ public class main extends JavaPlugin implements Runnable{
         for (Player p : Bukkit.getOnlinePlayers()) {
             authorization(p);
         }
+        //s
     }
 
     public void onEnable() {
